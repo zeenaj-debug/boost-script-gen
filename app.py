@@ -111,9 +111,23 @@ with col1:
     with metrics_col2:
         st.metric(label="Market Leader Rating", value=f"{competitor_rating} / {competitor_reviews} Revs")
     st.caption(f"Identified Market Rival: **{top_competitor}**")
-
 # --- COGNITIVE SCRIPT BUILDER ---
 rep_name = "Alex"
 
 if pillar == "Get Chosen (Reviews Focus)":
-    pain_text = f"you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {top_competitor} down the road has {competitor_reviews} reviews with
+    pain_text = f"""you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {top_competitor} down the road has {competitor_reviews} reviews with a {competitor_rating}-star rating, while you guys are sitting at {scraped_rating} stars."""
+    implication_text = f"""And look, what that means in reality is that **most locals are just going to click and call them first** over you because their profile looks safer. It basically means less money in your pocket for local jobs that should probably be coming to {biz_name}."""
+    solution_text = f"""What we do at Boost My Business is help {industry} teams automatically get those reviews rolling in right when you finish a job, so you instantly close that gap and look like the obvious choice online."""
+    zoom_text = f"""On that Zoom, I'll show you exactly how many reviews you need to overtake {top_competitor} and a look at the automated tool that gets them from your customers in 2 clicks."""
+
+elif pillar == "Get Found (SEO/Maps Focus)":
+    pain_text = f"""I was looking for {industry} teams in {suburb} this morning and I noticed that while {top_competitor} is locked into those top spots on the Google Map, {biz_name} is actually buried way further down the listings."""
+    implication_text = f"""What that means in the real world is that **you are essentially invisible to about 80% of the locals** searching for help in {suburb}. You're losing high-value local work to teams who aren't better than you, they're just easier to find."""
+    solution_text = f"""We specialize in optimizing local listings for {industry} businesses to push you straight into that top Google Map bracket so you're the first business people see when they need a hand."""
+    zoom_text = f"""On that Zoom, I’m going to run a live local heat-map for you. It’ll show you exactly where your ranking drops off in {suburb} and the 3 quick fixes to get you back in front of those buyers."""
+
+else: # Save Time
+    pain_text = f"""I was checking out your digital setup today and I noticed that if a customer hits your website or socials after-hours, or while you're flat out on a job, there's no fast way for them to instantly message you or get a reply."""
+    implication_text = f"""Because consumer attention spans are so short now, if they can't text or chat with you instantly, **they just bounce straight back to Google and message the next guy**. It means you're spending money on marketing but bleeding leads because you're too busy to answer instantly."""
+    solution_text = f"""We give {industry} teams a smart webchat and central inbox software that automatically captures those leads and texts them back instantly, keeping them hooked so you don't lose the job while your hands are full."""
+    zoom_text = f"""On that Zoom, I'll actually simulate a live lead coming into your business so you can see exactly how the software saves the deal and books it into your calendar automatically while you're asleep."""
