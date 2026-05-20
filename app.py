@@ -109,4 +109,11 @@ with col1:
     with metrics_col1:
         st.metric(label=f"{biz_name} Rating", value=f"{scraped_rating} / {scraped_reviews} Revs")
     with metrics_col2:
-        st.metric(label="Market Leader Rating", value=f"{competitor_rating} / {
+        st.metric(label="Market Leader Rating", value=f"{competitor_rating} / {competitor_reviews} Revs")
+    st.caption(f"Identified Market Rival: **{top_competitor}**")
+
+# --- COGNITIVE SCRIPT BUILDER ---
+rep_name = "Alex"
+
+if pillar == "Get Chosen (Reviews Focus)":
+    pain_text = f"you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {top_competitor} down the road has {competitor_reviews} reviews with
