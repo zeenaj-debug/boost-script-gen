@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import urllib.parse
 
 # Set professional SaaS page layout
 st.set_page_config(page_title="Boost My Business | Intel Engine", layout="wide")
@@ -46,13 +47,14 @@ st.markdown("""
         }
         .analytics-box {
             background-color: #ffffff;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #cbd5e1;
             border-radius: 6px;
-            padding: 14px;
+            padding: 16px;
             margin-bottom: 12px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
         .analytics-title {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #64748b;
             text-transform: uppercase;
             font-weight: 600;
@@ -60,7 +62,7 @@ st.markdown("""
             font-family: 'Montserrat', sans-serif !important;
         }
         .analytics-value {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: #0f172a;
             font-weight: 700;
             font-family: 'Montserrat', sans-serif !important;
@@ -70,7 +72,7 @@ st.markdown("""
             border: 2px solid #22c55e;
             border-radius: 8px;
             padding: 20px;
-            margin-top: 15px;
+            margin-bottom: 20px;
             font-family: 'Montserrat', sans-serif !important;
         }
         .objection-display-title {
@@ -115,7 +117,7 @@ with col1:
         ["Get Chosen (Reviews Focus)", "Get Found (SEO/Maps Focus)", "Save Time (Automation Focus)"]
     )
 
-# --- DATA PARSING ENGINE ---
+# --- DATA PARSING ENGINE (Guaranteed Fallbacks) ---
 if "bobs" in biz_name.lower():
     scraped_rating = 3.8
     scraped_reviews = 14
@@ -157,22 +159,19 @@ if run_search:
             import time
             time.sleep(0.4)
 
-# --- HIGHLY READABLE MARKET ANALYTICS PANEL ---
+# --- INTEL SIDEBAR RE-RENDER ---
 with col1:
     st.markdown("---")
-    st.subheader("Market Analytics")
+    # Dynamic Link Generator
+    search_query = urllib.parse.quote(f"{biz_name} {suburb}")
+    maps_query = urllib.parse.quote(f"{industry} in {suburb}")
     
-    st.markdown(f"""
-    <div class="analytics-box">
-        <div class="analytics-title">{biz_name} Rating</div>
-        <div class="analytics-value">{scraped_rating} ★ &nbsp;|&nbsp; {scraped_reviews} Reviews</div>
-    </div>
-    <div class="analytics-box">
-        <div class="analytics-title">Market Leader Rating</div>
-        <div class="analytics-value">{competitor_rating} ★ &nbsp;|&nbsp; {competitor_reviews} Reviews</div>
-    </div>
-    """, unsafe_allow_html=True)
-    st.caption(f"Identified Market Rival: **{top_competitor}**")
+    st.subheader("Live Verification Links")
+    link_col1, link_col2 = st.columns(2)
+    with link_col1:
+        st.link_button("🌐 Google Search Results", f"https://www.google.com/search?q={search_query}", use_container_width=True)
+    with link_col2:
+        st.link_button("📍 Google Business Profile", f"https://www.google.com/maps/search/?api=1&query={search_query}", use_container_width=True)
 
 # --- COGNITIVE SCRIPT BUILDER ---
 rep_name = "Alex"
@@ -195,46 +194,49 @@ else: # Save Time (Automation Focus)
     solution_text = f"We give {industry} teams a smart webchat and central inbox software that automatically captures those leads and texts them back instantly, keeping them hooked so you don't lose the job while your hands are full."
     zoom_text = f"I'll actually simulate a live lead coming into your business so you can see exactly how the software saves the deal and books it into your calendar automatically while you're asleep."
 
+# --- MAIN DISPLAY OVERHAUL (PRIORITY METRICS FIRST) ---
 with col2:
-    st.subheader("3. Live Pitch Execution Flow")
+    st.subheader("3. Live Intelligence Breakdown")
     
-    # Completely clean flow script with no chunked section boxes
-    flow_html = f"""
-    <div class="script-card">
-        "Hey, it's {rep_name} here from Boost My Business. Look, I know you're probably flat out on a job, so I'll keep this incredibly brief. I was auditing the {suburb} {industry} market on Google this morning and {biz_name} popped up on my dashboard. <br><br>
-        The specific reason I'm reaching out is {pain_text} <br><br>
-        {implication_text} <br><br>
-        We specialize strictly in fixing that visibility gap for {industry} businesses, engineering your configuration so you jump straight into that top Google Map bracket and become the absolute first team locals see.<br><br>
-        Now, I know you're busy running a crew and I'm not looking to sell you anything over the phone right now. What I wanted to do is pull up a live local map analysis for you on a quick 20-minute Zoom call later this week. {zoom_text} Even if you don't use us, you'll see exactly where your market is moving right now.<br><br>
-        Are you usually tied up on site in the mornings, or is early afternoon a bit cleaner for a quick look at the screen?"
-    </div>
-    """
-    st.markdown(flow_html, unsafe_allow_html=True)
+    # Priority Metrics Panel - Side by Side
+    m_col1, m_col2 = st.columns(2)
+    with m_col1:
+        st.markdown(f"""
+        <div class="analytics-box">
+            <div class="analytics-title">{biz_name} Profile Rating</div>
+            <div class="analytics-value">{scraped_rating} ★ &nbsp;|&nbsp; {scraped_reviews} Reviews</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with m_col2:
+        st.markdown(f"""
+        <div class="analytics-box">
+            <div class="analytics-title">Market Leader Profile Rating</div>
+            <div class="analytics-value">{competitor_rating} ★ &nbsp;|&nbsp; {competitor_reviews} Reviews</div>
+        </div>
+        """, unsafe_allow_html=True)
+    st.caption(f"Identified Market Rival: **{top_competitor}**")
     
-    # --- INTERACTIVE ACTION BUTTONS ---
-    st.markdown("### 4. Live Objection Handling Matrix")
-    st.caption("Click any response below if the owner interrupts or pushes back:")
-    
+    # Priority Objection Matrix Buttons
+    st.markdown("### Live Objection Matrix")
     btn_col1, btn_col2, btn_col3, btn_col4 = st.columns(4)
-    
     with btn_col1:
-        if st.button("⚠️ Too Busy / No Capacity", use_container_width=True):
+        if st.button("⚠️ Too Busy / Capacity", use_container_width=True):
             st.session_state.active_objection = "busy"
     with btn_col2:
-        if st.button("🤝 Has Marketing Agency", use_container_width=True):
+        if st.button("🤝 Has Agency Contract", use_container_width=True):
             st.session_state.active_objection = "agency"
     with btn_col3:
         if st.button("📧 'Just Send an Email'", use_container_width=True):
             st.session_state.active_objection = "email"
     with btn_col4:
-        if st.button("🔄 Clear Screen", use_container_width=True):
+        if st.button("🔄 Clear Response Panel", use_container_width=True):
             st.session_state.active_objection = None
 
-    # --- DYNAMIC REBUTTAL RENDERER ---
+    # Dynamic Rebuttal Display Area (Directly above script for instant reading)
     if st.session_state.active_objection == "busy":
         st.markdown(f"""
         <div class="objection-display-card">
-            <div class="objection-display-title">Rebuttal: Too Busy / No Capacity</div>
+            <div class="objection-display-title">Active Response Prompt: Capacity Constraints</div>
             <div class="objection-display-body">"Totally get that, mate, being run off your feet is a good problem to have. Most of the {industry} businesses we work with in {suburb} are flat out too. We’re actually not trying to flood you with more low-value jobs. What we do is help you automate things like your Google reviews so you can charge premium rates, pick the best jobs, and save yourself hours of admin. Let’s do a quick 20-minute Zoom later in the week—I'll show you how to automate the whole process so you can get hours back. Does Thursday afternoon work for you, or do you tend to clear the schedule on Friday mornings?"</div>
         </div>
         """, unsafe_allow_html=True)
@@ -242,7 +244,7 @@ with col2:
     elif st.session_state.active_objection == "agency":
         st.markdown(f"""
         <div class="objection-display-card">
-            <div class="objection-display-title">Rebuttal: Existing Agency Contract</div>
+            <div class="objection-display-title">Active Response Prompt: Existing Agency</div>
             <div class="objection-display-body">"Awesome, love to hear that. Honestly, if you've got someone handling your SEO, you're already ahead of 90% of the market. We’re actually a software platform, not a traditional agency. We plug in alongside what they do to automate your review generation. It basically ensures that all the traffic your agency is paying for actually chooses {biz_name} instead of scrolling past. Let's grab 20 minutes on Zoom tomorrow or Thursday. I'll show you the exact software gap we plug into so you can hand it straight to your current agency if you want to. Would tomorrow at 2:00 PM work, or is Thursday morning cleaner for you?"</div>
         </div>
         """, unsafe_allow_html=True)
@@ -250,7 +252,21 @@ with col2:
     elif st.session_state.active_objection == "email":
         st.markdown(f"""
         <div class="objection-display-card">
-            <div class="objection-display-title">Rebuttal: Direct Mail Request</div>
+            <div class="objection-display-title">Active Response Prompt: Email Request</div>
             <div class="objection-display-body">"No worries at all, I know you're flat out. Honestly, if I send an email, it’s just going to get buried under 50 quotes you have to get out tonight. Tell you what, let’s skip the generic email spam. Let's lock in 20 minutes on Zoom early next week. I'll bring up your live local map data, show you exactly where {top_competitor} is stealing those clicks, and you can map out a strategy from there. Are you cleaner early in the week like Monday afternoon, or is Tuesday better?"</div>
         </div>
         """, unsafe_allow_html=True)
+
+    # Re-routed Continuous Delivery Flow Script
+    st.markdown("### Continuous Live Script Flow")
+    flow_html = f"""
+    <div class="script-card">
+        "Hey, it's {rep_name} here from Boost My Business. Look, I know you're probably flat out on a job, so I'll keep this incredibly brief. I was auditing the {suburb} {industry} market on Google this morning and {biz_name} popped up on my dashboard. <br><br>
+        The specific reason I'm reaching out is {pain_text} <br><br>
+        {implication_text} <br><br>
+        We specialize strictly in fixing that visibility gap for {industry} businesses, engineering your configuration so you jump straight into that top Google Map bracket and become the absolute first team locals see.<br><br>
+        Now, I know you're busy running a crew and I'm not looking to sell you anything over the phone right now. What I wanted to do is pull up a live local map analysis for you on a quick 20-minute Zoom call later this week. {zoom_text} Even if you don't use us, you'll see exactly what your market is moving right now.<br><br>
+        Are you usually tied up on site in the mornings, or is early afternoon a bit cleaner for a quick look at the screen?"
+    </div>
+    """
+    st.markdown(flow_html, unsafe_allow_html=True)
