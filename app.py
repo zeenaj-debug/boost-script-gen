@@ -29,6 +29,7 @@ st.markdown("""
             padding: 24px;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
             margin-bottom: 16px;
+            white-space: pre-wrap;
         }
         /* Analytics box layout styling */
         .analytics-box {
@@ -129,67 +130,3 @@ with col1:
     """, unsafe_allow_html=True)
     
     # Competitor Box
-    st.markdown(f"""
-    <div class="analytics-box">
-        <div class="analytics-title">Market Leader Rating</div>
-        <div class="analytics-value">{competitor_rating} ★ | {competitor_reviews} Reviews</div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.caption(f"Identified Market Rival: **{top_competitor}**")
-
-# --- COGNITIVE SCRIPT BUILDER ---
-rep_name = "Alex"
-
-if pillar == "Get Chosen (Reviews Focus)":
-    pain_text = f"""you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {top_competitor} down the road has {competitor_reviews} reviews with a {competitor_rating}-star rating, while you guys are sitting at {scraped_rating} stars."""
-    implication_text = f"""And look, what that means in reality is that **most locals are just going to click and call them first** over you because their profile looks safer. It basically means less money in your pocket for local jobs that should probably be coming to {biz_name}."""
-    solution_text = f"""What we do at Boost My Business is help {industry} teams automatically get those reviews rolling in right when you finish a job, so you instantly close that gap and look like the obvious choice online."""
-    zoom_text = f"""On that Zoom, I'll show you exactly how many reviews you need to overtake {top_competitor} and a look at the automated tool that gets them from your customers in 2 clicks."""
-
-elif pillar == "Get Found (SEO/Maps Focus)":
-    pain_text = f"""I was looking for {industry} teams in {suburb} this morning and I noticed that while {top_competitor} is locked into those top spots on the Google Map, {biz_name} is actually buried way further down the listings."""
-    implication_text = f"""What that means in the real world is that **you are essentially invisible to about 80% of the locals** searching for help in {suburb}. You're losing high-value local work to teams who aren't better than you, they're just easier to find."""
-    solution_text = f"""We specialize in optimizing local listings for {industry} businesses to push you straight into that top Google Map bracket so you're the first business people see when they need a hand."""
-    zoom_text = f"""On that Zoom, I’m going to run a live local heat-map for you. It’ll show you exactly where your ranking drops off in {suburb} and the 3 quick fixes to get you back in front of those buyers."""
-
-else: # Save Time
-    pain_text = f"""I was checking out your digital setup today and I noticed that if a customer hits your website or socials after-hours, or while you're flat out on a job, there's no fast way for them to instantly message you or get a reply."""
-    implication_text = f"""Because consumer attention spans are so short now, if they can't text or chat with you instantly, **they just bounce straight back to Google and message the next guy**. It means you're spending money on marketing but bleeding leads because you're too busy to answer instantly."""
-    solution_text = f"""We give {industry} teams a smart webchat and central inbox software that automatically captures those leads and texts them back instantly, keeping them hooked so you don't lose the job while your hands are full."""
-    zoom_text = f"""On that Zoom, I'll actually simulate a live lead coming into your business so you can see exactly how the software saves the deal and books it into your calendar automatically while you're asleep."""
-
-# Clean, markdown execution layout
-full_script = f"""
-**THE HOOK**
-"Hey, it's {rep_name} here from Boost My Business. Have you guys heard of us at all? ... No worries at all, look—I was actually just doing some lookups on the {industry} market down in {suburb} this morning and {biz_name} popped up on my screen. Reason for the call is..."
-
-**THE PAIN & IMPLICATION**
-"...{pain_text} 
-
-{implication_text}"
-
-**THE SOLUTION**
-"{solution_text}"
-
-**THE 20-MINUTE ZOOM VALUE BUILD**
-"Now, I know you're flat out and I wasn't looking to take up your time while you're working. What I was hoping to do is grab a quick 20-minute Zoom later in the week.
-
-{zoom_text} Even if you don't use us, you'll see exactly what your market looks like right now.
-
-Are you usually tied up on site in the mornings, or is early afternoon a bit cleaner for a quick look at the screen?"
-"""
-
-with col2:
-    st.subheader("3. Tailored Delivery Script")
-    
-    # Styled Card Wrapper via Markdown Container
-    st.markdown(f'<div class="script-card">{full_script}</div>', unsafe_allow_html=True)
-    
-    st.markdown("---")
-    st.subheader("4. Objection Mitigation Matrix")
-    
-    tab1, tab2, tab3 = st.tabs(["Capacity Constraints", "Existing Agency Contract", "Direct Mail Request"])
-    
-    with tab1:
-        st.markdown(
