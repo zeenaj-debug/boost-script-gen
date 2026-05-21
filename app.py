@@ -172,15 +172,21 @@ if run_search:
 # --- INTEL SIDEBAR RE-RENDER ---
 with col1:
     st.markdown("---")
-    search_query = urllib.parse.quote(f"{biz_name} {suburb}")
+    
+    # This matches the highlighted Google structure: "Industry in Suburb, New South Wales"
+    # We add "New South Wales" or "NSW" to ground the search exactly like your screenshot
+    highlighted_phrase = f"{industry} in {suburb}, New South Wales"
+    search_query = urllib.parse.quote(highlighted_phrase)
     
     st.subheader("Live Verification Links")
     link_col1, link_col2 = st.columns(2)
     with link_col1:
+        # This will now launch a Google Search for exactly what was highlighted
         st.link_button("🌐 Google Search Results", f"https://www.google.com/search?q={search_query}", use_container_width=True)
     with link_col2:
-        st.link_button("📍 Google Business Profile", f"https://www.google.com/maps?q={search_query}", use_container_width=True)
-
+        # Keeps the specific business map profile link working side-by-side
+        biz_map_query = urllib.parse.quote(f"{biz_name} {suburb}")
+        st.link_button("📍 Google Business Profile", f"https://www.google.com/maps/search/?api=1&query={biz_map_query}", use_container_width=True)
 
 if pillar == "Get Chosen (Reviews Focus)":
     pain_text = f"you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {top_competitor} down the road has {competitor_reviews} reviews with a {competitor_rating}-star rating, while you guys are sitting at {scraped_rating} stars."
