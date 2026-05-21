@@ -267,17 +267,17 @@ with col2:
         st.markdown(f"""
         <div class="analytics-box">
             <div class="analytics-title">{biz_name} Profile Rating</div>
-            <div class="analytics-value">{scraped_rating} ★  |  {scraped_reviews} Reviews</div>
+            <div class="analytics-value">{st.session_state.scraped_rating} ★  |  {st.session_state.scraped_reviews} Reviews</div>
         </div>
         """, unsafe_allow_html=True)
     with m_col2:
         st.markdown(f"""
         <div class="analytics-box">
             <div class="analytics-title">Market Leader Profile Rating</div>
-            <div class="analytics-value">{competitor_rating} ★  |  {competitor_reviews} Reviews</div>
+            <div class="analytics-value">{st.session_state.competitor_rating} ★  |  {st.session_state.competitor_reviews} Reviews</div>
         </div>
         """, unsafe_allow_html=True)
-    st.caption(f"Identified Market Rival: **{top_competitor}**")
+    st.caption(f"Identified Market Rival: **{st.session_state.top_competitor}**")
     
     # Priority Objection Matrix Buttons
     st.markdown("### Live Objection Matrix")
