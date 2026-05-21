@@ -12,7 +12,7 @@ if "active_objection" not in st.session_state:
 # --- CUSTOM SAAS THEMING (CSS) ---
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght=400;500;600;700&display=swap');
 
         html, body, [data-testid="stSidebarNav"], .stMarkdown, p, div, label {
             font-family: 'Montserrat', sans-serif !important;
@@ -254,4 +254,20 @@ with col2:
         st.markdown(f"""
         <div class="objection-display-card">
             <div class="objection-display-title">Active Response Prompt: Email Request</div>
-            <div class="objection-display-body">"No worries at all, I know you're flat out
+            <div class="objection-display-body">"No worries at all, I know you're flat out. Honestly, if I send an email, it’s just going to get buried under 50 quotes you have to get out tonight. Tell you what, let’s skip the generic email spam. Let's lock in 20 minutes on Zoom early next week. I'll bring up your live local map data, show you exactly where {top_competitor} is stealing those clicks, and you can map out a strategy from there. Are you cleaner early in the week like Monday afternoon, or is Tuesday better?"</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Continuous Delivery Flow Script
+    st.markdown("### Continuous Live Script Flow")
+    flow_html = f"""
+    <div class="script-card">
+        "Hey, it's {rep_name} here from Boost My Business. Look, I know you're probably flat out on a job, so I'll keep this incredibly brief. I was auditing the {suburb} {industry} market on Google this morning and {biz_name} popped up on my dashboard. <br><br>
+        The specific reason I'm reaching out is {pain_text} <br><br>
+        {implication_text} <br><br>
+        We specialize strictly in fixing that visibility gap for {industry} businesses, engineering your configuration so you jump straight into that top Google Map bracket and become the absolute first team locals see.<br><br>
+        Now, I know you're busy running a crew and I'm not looking to sell you anything over the phone right now. What I wanted to do is pull up a live local map analysis for you on a quick 20-minute Zoom call later this week. {zoom_text} Even if you don't use us, you'll see exactly what your market is moving right now.<br><br>
+        Are you usually tied up on site in the mornings, or is early afternoon a bit cleaner for a quick look at the screen?"
+    </div>
+    """
+    st.markdown(flow_html, unsafe_allow_html=True)
