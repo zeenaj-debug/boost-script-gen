@@ -12,7 +12,7 @@ if "active_objection" not in st.session_state:
 # --- CUSTOM SAAS THEMING (CSS) ---
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght=400;500;600;700&display=swap');
 
         html, body, [data-testid="stSidebarNav"], .stMarkdown, p, div, label {
             font-family: 'Montserrat', sans-serif !important;
@@ -149,18 +149,13 @@ if not run_search:
         st.session_state.top_competitor = "Rosebery Plumbing Pros"
         st.session_state.competitor_reviews = 112
         st.session_state.competitor_rating = 4.9
-    elif "boost" in biz_name.lower():
+    else:
+        # Default fallback values for Boost My Business and custom audits
         st.session_state.scraped_rating = 4.7
         st.session_state.scraped_reviews = 323
-        st.session_state.top_competitor = f"{suburb} Digital Growth Pros"
-        st.session_state.competitor_reviews = 410
+        st.session_state.top_competitor = "Chippendale Marketing Agency Specialists"
+        st.session_state.competitor_reviews = 450
         st.session_state.competitor_rating = 4.9
-    else:
-        st.session_state.scraped_rating = 4.2
-        st.session_state.scraped_reviews = 25
-        st.session_state.top_competitor = f"{suburb} {industry} Competitor"
-        st.session_state.competitor_reviews = 85
-        st.session_state.competitor_rating = 4.7
 
 # Process live query lookup via API if secret token is found
 if run_search:
