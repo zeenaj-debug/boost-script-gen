@@ -97,7 +97,6 @@ st.caption("Proprietary Cold Call Scripting Engine & Google Business Profile Aud
 st.markdown("---")
 
 # --- SECURE API CONFIGURATION ---
-# This pulls safely from your Streamlit Cloud Dashboard secrets setup
 try:
     SERPAPI_KEY = st.secrets["SERPAPI_KEY"]
 except Exception:
@@ -162,7 +161,6 @@ if run_search:
         with st.spinner("Analyzing regional map data pack configurations..."):
             import time
             time.sleep(0.4)
-        st.info("Simulation mode active. Define 'SERPAPI_KEY' inside your Streamlit Cloud Dashboard Secrets panel to launch live lookup requests.")
 
 # --- INTEL SIDEBAR RE-RENDER ---
 with col1:
@@ -174,7 +172,7 @@ with col1:
     with link_col1:
         st.link_button("🌐 Google Search Results", f"https://www.google.com/search?q={search_query}", use_container_width=True)
     with link_col2:
-        st.link_button("📍 Google Business Profile", f"https://www.google.com/maps/search/?api=1&query={search_query}", use_container_width=True)
+        st.link_button("📍 Google Business Profile", f"https://www.google.com/maps?q={search_query}", use_container_width=True)
 
 # --- COGNITIVE SCRIPT BUILDER ---
 rep_name = "Alex"
@@ -183,11 +181,4 @@ if pillar == "Get Chosen (Reviews Focus)":
     pain_text = f"you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {top_competitor} down the road has {competitor_reviews} reviews with a {competitor_rating}-star rating, while you guys are sitting at {scraped_rating} stars."
     implication_text = f"And look, what that means in reality is that most locals are just going to click and call them first over you because their profile looks safer. It basically means less money in your pocket for local jobs that should probably be coming to {biz_name}."
     solution_text = f"What we do at Boost My Business is help {industry} teams automatically get those reviews rolling in right when you finish a job, so you instantly close that gap and look like the obvious choice online."
-    zoom_text = f"On that Zoom, I'll show you exactly how many reviews you need to overtake {top_competitor} and a look at the automated tool that gets them from your customers in 2 clicks."
-
-elif pillar == "Get Found (SEO/Maps Focus)":
-    else: # Save Time (Automation Focus)
-    pain_text = f"if a customer hits your website or socials after-hours, or while you're flat out on a job, there's no fast way for them to instantly message you or get a reply."
-    implication_text = f"Because consumer attention spans are so short now, if they can't text or chat with you instantly, they just bounce straight back to Google and message the next guy. It means you're spending money on marketing but bleeding leads because you're too busy to answer instantly."
-    solution_text = f"We give {industry} teams a smart webchat and central inbox software that automatically captures those leads and texts them back instantly, keeping them hooked so you don't lose the job while your hands are full."
-    zoom_text = f"I'll actually simulate a live lead coming into your business so you can see exactly how the software saves the deal and books it into your calendar automatically while you're asleep."
+    zoom_text
