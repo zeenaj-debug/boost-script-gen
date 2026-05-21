@@ -169,21 +169,4 @@ with col1:
     
     st.subheader("Live Verification Links")
     link_col1, link_col2 = st.columns(2)
-    with link_col1:
-        st.link_button("🌐 Google Search Results", f"https://www.google.com/search?q={search_query}", use_container_width=True)
-    with link_col2:
-        st.link_button("📍 Google Business Profile", f"https://www.google.com/maps?q={search_query}", use_container_width=True)
-
-# --- COGNITIVE SCRIPT BUILDER ---
-rep_name = "Alex"
-
-if pillar == "Get Chosen (Reviews Focus)":
-    pain_text = f"you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {top_competitor} down the road has {competitor_reviews} reviews with a {competitor_rating}-star rating, while you guys are sitting at {scraped_rating} stars."
-    implication_text = f"And look, what that means in reality is that most locals are just going to click and call them first over you because their profile looks safer. It basically means less money in your pocket for local jobs that should probably be coming to {biz_name}."
-    solution_text = f"What we do at Boost My Business is help {industry} teams automatically get those reviews rolling in right when you finish a job, so you instantly close that gap and look like the obvious choice online."
-    zoom_text = f"On that Zoom, I'll show you exactly how many reviews you need to overtake {top_competitor} and a look at the automated tool that gets them from your customers in 2 clicks."
-
-elif pillar == "Get Found (SEO/Maps Focus)":
-    pain_text = f"while {top_competitor} is completely locked into those top spots on the Google Map pack, {biz_name} is actually buried way down the listings."
-    implication_text = f"And look, what that means in the real world is that you are essentially invisible to about 80% of the locals searching for help in {suburb}. You're losing high-value local work to teams who aren't better than you, they're just easier to find."
-    solution_text = f"We specialize strictly in
+    with link_
