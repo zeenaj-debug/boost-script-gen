@@ -12,7 +12,7 @@ if "active_objection" not in st.session_state:
 # --- CUSTOM SAAS THEMING (CSS) ---
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght=400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
         html, body, [data-testid="stSidebarNav"], .stMarkdown, p, div, label {
             font-family: 'Montserrat', sans-serif !important;
@@ -93,7 +93,7 @@ st.markdown("""
 
 # --- BRANDED HEADER ---
 st.title("Boost My Business | Sales Intelligence Portal")
-st.caption("Proprietary Cold Call Scripting Engine & Google Business Profile Audit Hub (Persona: Business Owner)")
+st.caption("Proprietary Cold Call Scripting Engine & Google Business Profile Audit Hub")
 st.markdown("---")
 
 # --- SECURE API CONFIGURATION ---
@@ -107,11 +107,11 @@ col1, col2 = st.columns([1, 2])
 
 with col1:
     st.subheader("1. Prospect Discovery")
-    biz_name = st.text_input("Business Name", value="Bobs Plumbing")
-    industry = st.text_input("Industry Keyword", value="Plumber")
-    suburb = st.text_input("Suburb / Location", value="Rosebery")
+    biz_name = st.text_input("Business Name", value="Boost My Business")
+    industry = st.text_input("Industry Keyword", value="Software company")
+    suburb = st.text_input("Suburb / Location", value="Chippendale")
     
-    # --- NEW: REP NAME & PERSONA SELECTION ---
+    # Rep configuration
     rep_name = st.text_input("Rep Name", value="Alex")
     persona = st.selectbox(
         "Target Persona:", 
@@ -129,19 +129,19 @@ with col1:
 
 # --- DATA PARSING ENGINE (Live Fetch & Smart Dynamic Fallbacks) ---
 
-# 1. Establish core session states so data doesn't wipe on button clicks
+# Initialize global tracking properties in session state
 if "scraped_rating" not in st.session_state:
     st.session_state.scraped_rating = 4.7
 if "scraped_reviews" not in st.session_state:
     st.session_state.scraped_reviews = 323
 if "top_competitor" not in st.session_state:
-    st.session_state.top_competitor = "Local Industry Leader"
+    st.session_state.top_competitor = "Chippendale Marketing Agency Specialists"
 if "competitor_reviews" not in st.session_state:
     st.session_state.competitor_reviews = 450
 if "competitor_rating" not in st.session_state:
     st.session_state.competitor_rating = 4.9
 
-# 2. Update baseline fallbacks instantly when user types in the text boxes
+# Apply reactive baseline updates if search hasn't been fired yet
 if not run_search:
     if "bob" in biz_name.lower():
         st.session_state.scraped_rating = 3.8
@@ -156,14 +156,13 @@ if not run_search:
         st.session_state.competitor_reviews = 410
         st.session_state.competitor_rating = 4.9
     else:
-        # Dynamic fallback for any other random business entered
         st.session_state.scraped_rating = 4.2
         st.session_state.scraped_reviews = 25
         st.session_state.top_competitor = f"{suburb} {industry} Competitor"
         st.session_state.competitor_reviews = 85
         st.session_state.competitor_rating = 4.7
 
-# 3. Overwrite with real live Google data if API key is active
+# Process live query lookup via API if secret token is found
 if run_search:
     if SERPAPI_KEY != "SECURE_SECRET_NOT_FOUND" and len(SERPAPI_KEY) > 10:
         with st.spinner("Executing live registry lookup..."):
@@ -192,61 +191,31 @@ if run_search:
             import time
             time.sleep(0.4)
 
-if run_search:
-    if SERPAPI_KEY != "SECURE_SECRET_NOT_FOUND" and len(SERPAPI_KEY) > 10:
-        with st.spinner("Executing live registry lookup..."):
-            try:
-                target_url = f"https://serpapi.com/search.json?engine=google_maps&q={biz_name}+{suburb}&api_key={SERPAPI_KEY}"
-                target_res = requests.get(target_url).json()
-                if "local_results" in target_res and len(target_res["local_results"]) > 0:
-                    biz_data = target_res["local_results"][0]
-                    scraped_rating = biz_data.get("rating", 4.0)
-                    scraped_reviews = biz_data.get("reviews", 5)
-                
-                comp_url = f"https://serpapi.com/search.json?engine=google_maps&q={industry}+in+{suburb}&api_key={SERPAPI_KEY}"
-                comp_res = requests.get(comp_url).json()
-                if "local_results" in comp_res and len(comp_res["local_results"]) > 0:
-                    for res in comp_res["local_results"]:
-                        if biz_name.lower() not in res.get("title", "").lower():
-                            top_competitor = res.get("title", "A top competitor")
-                            competitor_reviews = res.get("reviews", 50)
-                            competitor_rating = res.get("rating", 4.7)
-                            break
-                st.success("Live data audit complete.")
-            except Exception as e:
-                st.warning("Live lookup timeout. Defaulting to local intelligence matrix.")
-    else:
-        with st.spinner("Analyzing regional map data pack configurations..."):
-            import time
-            time.sleep(0.4)
-
 # --- INTEL SIDEBAR RE-RENDER ---
 with col1:
     st.markdown("---")
     
-    # This matches the highlighted Google structure: "Industry in Suburb, New South Wales"
-    # We add "New South Wales" or "NSW" to ground the search exactly like your screenshot
+    # Highlighted structure lookup: "Industry in Suburb, New South Wales"
     highlighted_phrase = f"{industry} in {suburb}, New South Wales"
     search_query = urllib.parse.quote(highlighted_phrase)
+    biz_map_query = urllib.parse.quote(f"{biz_name} {suburb}")
     
     st.subheader("Live Verification Links")
     link_col1, link_col2 = st.columns(2)
     with link_col1:
-        # This will now launch a Google Search for exactly what was highlighted
         st.link_button("🌐 Google Search Results", f"https://www.google.com/search?q={search_query}", use_container_width=True)
     with link_col2:
-        # Keeps the specific business map profile link working side-by-side
-        biz_map_query = urllib.parse.quote(f"{biz_name} {suburb}")
         st.link_button("📍 Google Business Profile", f"https://www.google.com/maps/search/?api=1&query={biz_map_query}", use_container_width=True)
 
+# --- COGNITIVE SCRIPT BUILDER ---
 if pillar == "Get Chosen (Reviews Focus)":
-    pain_text = f"you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {top_competitor} down the road has {competitor_reviews} reviews with a {competitor_rating}-star rating, while you guys are sitting at {scraped_rating} stars."
+    pain_text = f"you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {st.session_state.top_competitor} down the road has {st.session_state.competitor_reviews} reviews with a {st.session_state.competitor_rating}-star rating, while you guys are sitting at {st.session_state.scraped_rating} stars."
     implication_text = f"And look, what that means in reality is that most locals are just going to click and call them first over you because their profile looks safer. It basically means less money in your pocket for local jobs that should probably be coming to {biz_name}."
     solution_text = f"What we do at Boost My Business is help {industry} teams automatically get those reviews rolling in right when you finish a job, so you instantly close that gap and look like the obvious choice online."
-    zoom_text = f"On that Zoom, I'll show you exactly how many reviews you need to overtake {top_competitor} and a look at the automated tool that gets them from your customers in 2 clicks."
+    zoom_text = f"On that Zoom, I'll show you exactly how many reviews you need to overtake {st.session_state.top_competitor} and a look at the automated tool that gets them from your customers in 2 clicks."
 
 elif pillar == "Get Found (SEO/Maps Focus)":
-    pain_text = f"while {top_competitor} is completely locked into those top spots on the Google Map pack, {biz_name} is actually buried way down the listings."
+    pain_text = f"while {st.session_state.top_competitor} is completely locked into those top spots on the Google Map pack, {biz_name} is actually buried way down the listings."
     implication_text = f"And look, what that means in the real world is that you are essentially invisible to about 80% of the locals searching for help in {suburb}. You're losing high-value local work to teams who aren't better than you, they're just easier to find."
     solution_text = f"We specialize strictly in optimizing local listings for {industry} businesses to push you straight into that top Google Map bracket so you're the first business people see when they need a hand."
     zoom_text = f"I’m going to run a live local heat-map for you. It’ll show you exactly where your ranking drops off across {suburb} and the 3 quick fixes to get you back in front of those buyers."
@@ -299,7 +268,7 @@ with col2:
     if st.session_state.active_objection == "busy":
         st.markdown(f"""
         <div class="objection-display-card">
-            <div class="objection-display-title">Active Response Prompt: Capacity Constraints</div>
+            <div class="objection-display-title">Active Response Prompt ({persona}): Capacity Constraints</div>
             <div class="objection-display-body">"Totally get that, mate, being run off your feet is a good problem to have. Most of the {industry} businesses we work with in {suburb} are flat out too. We’re actually not trying to flood you with more low-value jobs. What we do is help you automate things like your Google reviews so you can charge premium rates, pick the best jobs, and save yourself hours of admin. Let’s do a quick 20-minute Zoom later in the week—I'll show you how to automate the whole process so you can get hours back. Does Thursday afternoon work for you, or do you tend to clear the schedule on Friday mornings?"</div>
         </div>
         """, unsafe_allow_html=True)
@@ -307,7 +276,7 @@ with col2:
     elif st.session_state.active_objection == "agency":
         st.markdown(f"""
         <div class="objection-display-card">
-            <div class="objection-display-title">Active Response Prompt: Existing Agency</div>
+            <div class="objection-display-title">Active Response Prompt ({persona}): Existing Agency</div>
             <div class="objection-display-body">"Awesome, love to hear that. Honestly, if you've got someone handling your SEO, you're already ahead of 90% of the market. We’re actually a software platform, not a traditional agency. We plug in alongside what they do to automate your review generation. It basically ensures that all the traffic your agency is paying for actually chooses {biz_name} instead of scrolling past. Let's grab 20 minutes on Zoom tomorrow or Thursday. I'll show you the exact software gap we plug into so you can hand it straight to your current agency if you want to. Would tomorrow at 2:00 PM work, or is Thursday morning cleaner for you?"</div>
         </div>
         """, unsafe_allow_html=True)
@@ -315,8 +284,8 @@ with col2:
     elif st.session_state.active_objection == "email":
         st.markdown(f"""
         <div class="objection-display-card">
-            <div class="objection-display-title">Active Response Prompt: Email Request</div>
-            <div class="objection-display-body">"No worries at all, I know you're flat out. Honestly, if I send an email, it’s just going to get buried under 50 quotes you have to get out tonight. Tell you what, let’s skip the generic email spam. Let's lock in 20 minutes on Zoom early next week. I'll bring up your live local map data, show you exactly where {top_competitor} is stealing those clicks, and you can map out a strategy from there. Are you cleaner early in the week like Monday afternoon, or is Tuesday better?"</div>
+            <div class="objection-display-title">Active Response Prompt ({persona}): Email Request</div>
+            <div class="objection-display-body">"No worries at all, I know you're flat out. Honestly, if I send an email, it’s just going to get buried under 50 quotes you have to get out tonight. Tell you what, let’s skip the generic email spam. Let's lock in 20 minutes on Zoom early next week. I'll bring up your live local map data, show you exactly where {st.session_state.top_competitor} is stealing those clicks, and you can map out a strategy from there. Are you cleaner early in the week like Monday afternoon, or is Tuesday better?"</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -327,7 +296,7 @@ with col2:
         "Hey, it's {rep_name} here from Boost My Business. Look, I know you're probably flat out on a job, so I'll keep this incredibly brief. I was auditing the {suburb} {industry} market on Google this morning and {biz_name} popped up on my dashboard. <br><br>
         The specific reason I'm reaching out is {pain_text} <br><br>
         {implication_text} <br><br>
-        We specialize strictly in fixing that visibility gap for {industry} businesses, engineering your configuration so you jump straight into that top Google Map bracket and become the absolute first team locals see.<br><br>
+        {solution_text}<br><br>
         Now, I know you're busy running a crew and I'm not looking to sell you anything over the phone right now. What I wanted to do is pull up a live local map analysis for you on a quick 20-minute Zoom call later this week. {zoom_text} Even if you don't use us, you'll see exactly what your market is moving right now.<br><br>
         Are you usually tied up on site in the mornings, or is early afternoon a bit cleaner for a quick look at the screen?"
     </div>
