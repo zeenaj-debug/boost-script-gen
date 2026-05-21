@@ -181,8 +181,6 @@ with col1:
     with link_col2:
         st.link_button("📍 Google Business Profile", f"https://www.google.com/maps?q={search_query}", use_container_width=True)
 
-# --- COGNITIVE SCRIPT BUILDER ---
-rep_name = "Alex"
 
 if pillar == "Get Chosen (Reviews Focus)":
     pain_text = f"you guys are actually showing up right there when someone looks for a {industry} in {suburb}, but looking at the map pack, the problem is {top_competitor} down the road has {competitor_reviews} reviews with a {competitor_rating}-star rating, while you guys are sitting at {scraped_rating} stars."
