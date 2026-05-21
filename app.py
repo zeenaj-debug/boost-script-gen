@@ -128,11 +128,11 @@ if "bobs" in biz_name.lower():
     competitor_reviews = 112
     competitor_rating = 4.9
 else:
-    scraped_rating = 4.1
-    scraped_reviews = 19
+    scraped_rating = 4.7
+    scraped_reviews = 323
     top_competitor = f"{suburb} {industry} Specialists"
-    competitor_reviews = 84
-    competitor_rating = 4.8
+    competitor_reviews = 450  # Or whatever mock competitor number you want to pitch against
+    competitor_rating = 4.9
 
 if run_search:
     if SERPAPI_KEY != "SECURE_SECRET_NOT_FOUND" and len(SERPAPI_KEY) > 10:
