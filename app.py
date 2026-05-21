@@ -111,6 +111,13 @@ with col1:
     industry = st.text_input("Industry Keyword", value="Plumber")
     suburb = st.text_input("Suburb / Location", value="Rosebery")
     
+    # --- NEW: REP NAME & PERSONA SELECTION ---
+    rep_name = st.text_input("Rep Name", value="Alex")
+    persona = st.selectbox(
+        "Target Persona:", 
+        ["Business Owner", "Gatekeeper / Receptionist", "Manager / Partner"]
+    )
+    
     run_search = st.button("Run Google Profile Audit", type="primary")
     
     st.markdown("---")
