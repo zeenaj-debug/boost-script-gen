@@ -186,7 +186,8 @@ if pillar == "Get Chosen (Reviews Focus)":
     zoom_text = f"On that Zoom, I'll show you exactly how many reviews you need to overtake {top_competitor} and a look at the automated tool that gets them from your customers in 2 clicks."
 
 elif pillar == "Get Found (SEO/Maps Focus)":
-    pain_text = f"while {top_competitor} is completely locked into those top spots on the Google Map pack, {biz_name} is actually buried way down the listings."
-    implication_text = f"And look, what that means in the real world is that you are essentially invisible to about 80% of the locals searching for help in {suburb}. You're losing high-value local work to teams who aren't better than you, they're just easier to find."
-    solution_text = f"We specialize strictly in optimizing local listings for {industry} businesses to push you straight into that top Google Map bracket so you're the first business people see when they need a hand."
-    zoom_text =
+    else: # Save Time (Automation Focus)
+    pain_text = f"if a customer hits your website or socials after-hours, or while you're flat out on a job, there's no fast way for them to instantly message you or get a reply."
+    implication_text = f"Because consumer attention spans are so short now, if they can't text or chat with you instantly, they just bounce straight back to Google and message the next guy. It means you're spending money on marketing but bleeding leads because you're too busy to answer instantly."
+    solution_text = f"We give {industry} teams a smart webchat and central inbox software that automatically captures those leads and texts them back instantly, keeping them hooked so you don't lose the job while your hands are full."
+    zoom_text = f"I'll actually simulate a live lead coming into your business so you can see exactly how the software saves the deal and books it into your calendar automatically while you're asleep."
