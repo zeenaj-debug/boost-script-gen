@@ -200,4 +200,58 @@ with col2:
     st.subheader("3. Live Intelligence Breakdown")
     
     # Priority Metrics Panel - Side by Side
-    m_col1, m_col
+    m_col1, m_col2 = st.columns(2)
+    with m_col1:
+        st.markdown(f"""
+        <div class="analytics-box">
+            <div class="analytics-title">{biz_name} Profile Rating</div>
+            <div class="analytics-value">{scraped_rating} ★  |  {scraped_reviews} Reviews</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with m_col2:
+        st.markdown(f"""
+        <div class="analytics-box">
+            <div class="analytics-title">Market Leader Profile Rating</div>
+            <div class="analytics-value">{competitor_rating} ★  |  {competitor_reviews} Reviews</div>
+        </div>
+        """, unsafe_allow_html=True)
+    st.caption(f"Identified Market Rival: **{top_competitor}**")
+    
+    # Priority Objection Matrix Buttons
+    st.markdown("### Live Objection Matrix")
+    btn_col1, btn_col2, btn_col3, btn_col4 = st.columns(4)
+    with btn_col1:
+        if st.button("⚠️ Too Busy / Capacity", use_container_width=True):
+            st.session_state.active_objection = "busy"
+    with btn_col2:
+        if st.button("🤝 Has Agency Contract", use_container_width=True):
+            st.session_state.active_objection = "agency"
+    with btn_col3:
+        if st.button("📧 'Just Send an Email'", use_container_width=True):
+            st.session_state.active_objection = "email"
+    with btn_col4:
+        if st.button("🔄 Clear Response Panel", use_container_width=True):
+            st.session_state.active_objection = None
+
+    # Dynamic Rebuttal Display Area
+    if st.session_state.active_objection == "busy":
+        st.markdown(f"""
+        <div class="objection-display-card">
+            <div class="objection-display-title">Active Response Prompt: Capacity Constraints</div>
+            <div class="objection-display-body">"Totally get that, mate, being run off your feet is a good problem to have. Most of the {industry} businesses we work with in {suburb} are flat out too. We’re actually not trying to flood you with more low-value jobs. What we do is help you automate things like your Google reviews so you can charge premium rates, pick the best jobs, and save yourself hours of admin. Let’s do a quick 20-minute Zoom later in the week—I'll show you how to automate the whole process so you can get hours back. Does Thursday afternoon work for you, or do you tend to clear the schedule on Friday mornings?"</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    elif st.session_state.active_objection == "agency":
+        st.markdown(f"""
+        <div class="objection-display-card">
+            <div class="objection-display-title">Active Response Prompt: Existing Agency</div>
+            <div class="objection-display-body">"Awesome, love to hear that. Honestly, if you've got someone handling your SEO, you're already ahead of 90% of the market. We’re actually a software platform, not a traditional agency. We plug in alongside what they do to automate your review generation. It basically ensures that all the traffic your agency is paying for actually chooses {biz_name} instead of scrolling past. Let's grab 20 minutes on Zoom tomorrow or Thursday. I'll show you the exact software gap we plug into so you can hand it straight to your current agency if you want to. Would tomorrow at 2:00 PM work, or is Thursday morning cleaner for you?"</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    elif st.session_state.active_objection == "email":
+        st.markdown(f"""
+        <div class="objection-display-card">
+            <div class="objection-display-title">Active Response Prompt: Email Request</div>
+            <div class="objection-display-body">"No worries at all, I know you're flat out
